@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1039043410894",
+    "firebase_url": "https://trade-mate-bmsce.firebaseio.com",
+    "project_id": "trade-mate-bmsce",
+    "storage_bucket": "trade-mate-bmsce.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1039043410894:android:72af498ff7efeef125099f",
+        "android_client_info": {
+          "package_name": "com.example.trademate"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1039043410894-beemv13naurin536k82pbfkedh3l750t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCVbC7n5bFFivgyyI19fIOFbElZPnOEwzY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1039043410894-beemv13naurin536k82pbfkedh3l750t.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
