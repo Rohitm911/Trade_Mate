@@ -122,6 +122,7 @@
                             android:elevation="8dp">
 
                             <ImageView
+                                android:id="@+id/household"
                                 android:layout_width="30dp"
                                 android:layout_height="30dp"
                                 android:layout_centerInParent="true"
@@ -130,6 +131,7 @@
                         </RelativeLayout>
 
                         <TextView
+
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center_horizontal"
@@ -150,6 +152,7 @@
                             android:elevation="8dp">
 
                             <ImageView
+                                android:id="@+id/grocery"
                                 android:layout_width="30dp"
                                 android:layout_height="30dp"
                                 android:layout_centerInParent="true"
@@ -179,6 +182,7 @@
                             android:elevation="8dp">
 
                             <ImageView
+                                android:id="@+id/books"
                                 android:layout_width="30dp"
                                 android:layout_height="30dp"
                                 android:layout_centerInParent="true"
@@ -207,6 +211,7 @@
                             android:elevation="8dp">
 
                             <ImageView
+                                android:id="@+id/electronics"
                                 android:layout_width="30dp"
                                 android:layout_height="30dp"
                                 android:layout_centerInParent="true"

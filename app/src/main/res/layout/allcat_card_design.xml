@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="2dp"
+    app:cardElevation="8dp"
+    android:layout_margin="10dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="10dp">
+
+        <ImageView
+            android:id="@+id/electronics_image"
+            android:layout_width="128dp"
+            android:layout_height="153dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/dummy_grocery" />
+
+        <TextView
+            android:id="@+id/electronics_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/electronics_image"
+            android:layout_toRightOf="@id/electronics_image"
+            android:fontFamily="@font/baloo"
+            android:layout_marginLeft="5dp"
+            android:lineHeight="20dp"
+            android:text="Dummy text"
+            android:textColor="@color/colorAccent"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/electronics_desc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_below="@id/electronics_title"
+            android:layout_toRightOf="@id/electronics_image"
+            android:rating="4"
+
+            android:text="short description" />
+
+        <TextView
+            android:id="@+id/electronics_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/electronics_image"
+            android:layout_alignParentRight="true"
+            android:padding="10dp"
+            android:text="Rs. 100"
+            android:textSize="20sp"/>
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

@@ -32,6 +32,10 @@ public class UserDashboard extends AppCompatActivity implements NavigationView.O
     NavigationView navigationView;
     ImageView menuIcon;
     LinearLayout contentView;
+    ImageView electronics_img;
+    ImageView books_img;
+    ImageView household_img;
+    ImageView grocery_img;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,14 +45,62 @@ public class UserDashboard extends AppCompatActivity implements NavigationView.O
         featuredRecycler = findViewById(R.id.featured_recycler);
         mostViewedRecycler = findViewById(R.id.most_viewed_recycler);
         categoriesRecycler = findViewById(R.id.categories_recycler);
-
         drawerLayout = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.navigation_view);
         menuIcon = findViewById(R.id.menu_icon);
         contentView = findViewById(R.id.contentView);
 
-        naviagtionDrawer();
+        //go to electronics items
+        electronics_img=findViewById(R.id.electronics);
+        electronics_img.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(UserDashboard.this, Electronics_category.class);
+                startActivity(intent);
+                //finish();
+            }
 
+        });
+
+        //go to books items
+        books_img=findViewById(R.id.books);
+        books_img.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(UserDashboard.this, Books_category.class);
+                startActivity(intent);
+                //finish();
+            }
+
+        });
+
+        // go to house hold
+        household_img=findViewById(R.id.household);
+        household_img.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(UserDashboard.this, Household_category.class);
+                startActivity(intent);
+                //finish();
+            }
+
+        });
+
+        //go to grocery
+        grocery_img=findViewById(R.id.grocery);
+        grocery_img.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(UserDashboard.this, Grocery_category.class);
+                startActivity(intent);
+                //finish();
+            }
+
+        });
+
+
+
+        naviagtionDrawer();
         featuredRecycler();
         mostViewedRecycler();
         categoriesRecycler();

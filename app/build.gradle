@@ -42,4 +42,7 @@ dependencies {
     // Glide v4 uses this new annotation processor -- see https://bumptech.github.io/glide/doc/generatedapi.html
     annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
 
+    //retrieving images from firebase
+    implementation 'com.squareup.picasso:picasso:2.71828'
+
 }

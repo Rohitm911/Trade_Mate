@@ -9,7 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Search"></activity>
+        <activity android:name=".Household_category"></activity>
+        <activity android:name=".Grocery_category" />
+        <activity android:name=".Books_category" />
+        <activity android:name=".Electronics_category" />
+        <activity android:name=".Search" />
         <activity android:name=".AllCategories" />
         <activity android:name=".UserDashboard" />
         <activity android:name=".UserProfile" />
