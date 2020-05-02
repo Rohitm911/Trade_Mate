@@ -36,6 +36,7 @@ public class UserDashboard extends AppCompatActivity implements NavigationView.O
     ImageView books_img;
     ImageView household_img;
     ImageView grocery_img;
+    ImageView cart_img;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,6 +97,16 @@ public class UserDashboard extends AppCompatActivity implements NavigationView.O
                 //finish();
             }
 
+        });
+
+        //go to cart
+        cart_img=findViewById(R.id.go_to_cart);
+        cart_img.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(UserDashboard.this, cart.class);
+                startActivity(intent);
+            }
         });
 
 

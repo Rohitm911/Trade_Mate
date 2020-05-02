@@ -10,8 +10,7 @@
 
     <RelativeLayout
     android:layout_width="wrap_content"
-    android:layout_height="190dp"
-        android:layout_marginBottom="20dp">
+    android:layout_height="190dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -41,17 +40,12 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/electronics_recycler"
+
         android:layout_width="match_parent"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:layout_height="425dp"
+        android:layout_height="match_parent"
         android:background="#f2f5f8" />
-
-
-
-
-
-
 
 
 </LinearLayout>

@@ -9,7 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Household_category"></activity>
+        <activity android:name=".Payment" />
+        <activity android:name=".cart" />
+        <activity android:name=".SingleItemDisplay" />
+        <activity android:name=".Household_category" />
         <activity android:name=".Grocery_category" />
         <activity android:name=".Books_category" />
         <activity android:name=".Electronics_category" />
@@ -26,6 +29,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".thank" />
 
         <meta-data
             android:name="preloaded_fonts"

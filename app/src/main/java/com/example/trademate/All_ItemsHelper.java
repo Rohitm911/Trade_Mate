@@ -1,17 +1,17 @@
 package com.example.trademate;
 
 public class All_ItemsHelper {
-    String image,price,name,short_desc,long_desc,category;
+    String image,price,name,short_desc,full_desc,category;
 
     All_ItemsHelper(){
 
     }
 
-    All_ItemsHelper(String image,String name,String short_desc,String long_desc,String price,String category){
+    All_ItemsHelper(String image,String name,String short_desc,String full_desc,String price,String category){
         this.image=image;
         this.name=name;
         this.short_desc=short_desc;
-        this.long_desc=long_desc;
+        this.full_desc=full_desc;
         this.price=price;
         this.category=category;
     }
@@ -57,11 +57,11 @@ public class All_ItemsHelper {
         this.short_desc = short_desc;
     }
 
-    public String getLong_desc() {
-        return long_desc;
+    public String getFull_desc() {
+        return full_desc;
     }
 
-    public void setLong_desc(String long_desc) {
-        this.long_desc = long_desc;
+    public void setFull_desc(String long_desc) {
+        this.full_desc = long_desc;
     }
 }

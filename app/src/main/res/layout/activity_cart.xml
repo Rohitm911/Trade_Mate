@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".cart">
+
+    <TextView
+        android:id="@+id/cart_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:background="#fece2f"
+        android:fontFamily="@font/bungee"
+        android:textColor="#000"
+        android:gravity="center"
+        android:text="YOUR CART"
+        android:textSize="20sp"
+        />
+    <LinearLayout
+        android:id="@+id/cart_header2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@+id/cart_header"
+        android:background="#fece2f">
+        <TextView
+            android:id="@+id/itemcount"
+            android:layout_width="290dp"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:layout_marginLeft="5dp"
+            android:textColor="#000"
+            android:text="Total items:"/>
+        <Button
+            android:id="@+id/clear_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#fece2f"
+            android:fontFamily="@font/bungee"
+            android:gravity="center"
+            android:textSize="11dp"
+            android:text="clear cart"
+            android:layout_marginLeft="20dp"
+            android:textColor="#000"
+            style="?android:attr/borderlessButtonStyle"/>
+
+
+    </LinearLayout>
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/cart_recycler"
+        android:layout_width="match_parent"
+        android:layout_below="@+id/cart_header2"
+        android:layout_above="@+id/cart_footer"
+        android:layout_height="200dp"
+        android:background="#f2f5f8" />
+
+
+    <LinearLayout
+        android:id="@+id/cart_footer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true"
+        android:background="#000"
+        android:padding="10dp">
+        <TextView
+            android:id="@+id/total"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:textSize="17sp"
+            android:textColor="#f2f5f8"
+            android:text="Total price:"/>
+        <Button
+            android:id="@+id/checkout_btn"
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:background="#fece2f"
+            android:fontFamily="@font/bungee"
+            android:textColor="#000"
+            android:textSize="15sp"
+            android:gravity="center"
+            android:text="CHECKOUT"
+            android:layout_marginLeft="10dp"/>
+
+
+
+
+    </LinearLayout>
+
+
+</RelativeLayout>
