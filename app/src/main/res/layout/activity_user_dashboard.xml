@@ -37,7 +37,6 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_centerVertical="true"
-                android:onClick="goToUserProfile"
                 android:src="@drawable/side_menu_icon" />
 
             <ImageView
@@ -91,7 +90,8 @@
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
                             android:layout_marginLeft="15dp"
-                            android:text="Search..." />
+                            android:text="Search..."
+                            android:onClick="goToSearch"/>
 
                         <ImageView
                             android:layout_width="30dp"

@@ -1,16 +1,25 @@
 package com.example.trademate;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 public class UserProfile extends AppCompatActivity {
 
@@ -18,10 +27,12 @@ public class UserProfile extends AppCompatActivity {
     TextView fullNameLabel, usernameLabel;
     DatabaseReference reference;
     String user_username, user_name, user_email, user_phoneNo, user_password;
+    SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_user_profile);
         reference = FirebaseDatabase.getInstance().getReference("user");
         fullName = findViewById(R.id.full_name_profile);
@@ -30,18 +41,41 @@ public class UserProfile extends AppCompatActivity {
         password = findViewById(R.id.password_profile);
         fullNameLabel = findViewById(R.id.fullname_field);
         usernameLabel = findViewById(R.id.username_field);
-
+        sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
         showAllUserData();
     }
 
     private void showAllUserData() {
 
-        Intent intent = getIntent();
-        user_username = intent.getStringExtra("username");
-        user_name = intent.getStringExtra("name");
-        user_email = intent.getStringExtra("email");
-        user_phoneNo = intent.getStringExtra("phoneNo");
-        user_password = intent.getStringExtra("password");
+        user_username = sharedPreferences.getString("usernameKey", "");
+        user_name = sharedPreferences.getString("nameKey", "");
+        user_email = sharedPreferences.getString("emailKey", "");
+        user_phoneNo = sharedPreferences.getString("phoneNoKey", "");
+        user_password = sharedPreferences.getString("passwordKey", "");
+
+//        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("user");
+//        Query checkUser = reference.orderByChild("username").equalTo(user_username);
+//        checkUser.addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                if (dataSnapshot.exists()){
+//
+//                    user_name = dataSnapshot.child(user_username).child("name").getValue(String.class);
+//                    user_email = dataSnapshot.child(user_username).child("email").getValue(String.class);
+//                    user_phoneNo = dataSnapshot.child(user_username).child("phoneNo").getValue(String.class);
+//                    user_password = dataSnapshot.child(user_username).child("password").getValue(String.class);
+//
+//                }
+//
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError databaseError) {
+//
+//            }
+//        });
+
+        //Log.i("info3",user_name);
 
         fullNameLabel.setText(user_name);
         usernameLabel.setText(user_username);
@@ -101,7 +135,7 @@ public class UserProfile extends AppCompatActivity {
         }
     }
 
-    public void goToDashBoard(View view){
+    public void goToDashBoard(View view) {
         Intent intent = new Intent(getApplicationContext(), UserDashboard.class);
         startActivity(intent);
         finish();

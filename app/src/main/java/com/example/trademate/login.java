@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -23,6 +24,8 @@ public class login extends AppCompatActivity {
 
     TextInputLayout username, password;
     ProgressBar progressBar;
+    SharedPreferences sharedPreferences;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,6 +35,7 @@ public class login extends AppCompatActivity {
         Button callSignUp = findViewById(R.id.go_signUp);
         progressBar = findViewById(R.id.login_progressBar);
         progressBar.setVisibility(View.GONE);
+        sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
         callSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -41,6 +45,7 @@ public class login extends AppCompatActivity {
             }
         });
     }
+
     private Boolean validateUsername() {
         String val = username.getEditText().getText().toString();
         if (val.isEmpty()) {
@@ -52,6 +57,7 @@ public class login extends AppCompatActivity {
             return true;
         }
     }
+
     private Boolean validatePassword() {
         String val = password.getEditText().getText().toString();
         if (val.isEmpty()) {
@@ -63,18 +69,19 @@ public class login extends AppCompatActivity {
             return true;
         }
     }
-    public void loginUser(View view){
+
+    public void loginUser(View view) {
         if (!validateUsername() | !validatePassword()) {
             return;
-        }else{
+        } else {
             isUser();
         }
     }
 
     private void isUser() {
-        InputMethodManager inputManager = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+        InputMethodManager inputManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
 
-        inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),InputMethodManager.HIDE_NOT_ALWAYS);
+        inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
         progressBar.setVisibility(View.VISIBLE);
         final String userEnteredUsername = username.getEditText().getText().toString().trim();
         final String userEnteredPassword = password.getEditText().getText().toString().trim();
@@ -83,7 +90,7 @@ public class login extends AppCompatActivity {
         checkUser.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (dataSnapshot.exists()){
+                if (dataSnapshot.exists()) {
                     username.setError(null);
                     username.setErrorEnabled(false);
                     String passwordFromDB = dataSnapshot.child(userEnteredUsername).child("password").getValue(String.class);
@@ -94,20 +101,27 @@ public class login extends AppCompatActivity {
                         String usernameFromDB = dataSnapshot.child(userEnteredUsername).child("username").getValue(String.class);
                         String phoneNoFromDB = dataSnapshot.child(userEnteredUsername).child("phoneNo").getValue(String.class);
                         String emailFromDB = dataSnapshot.child(userEnteredUsername).child("email").getValue(String.class);
-                        Intent intent = new Intent(getApplicationContext(), UserProfile.class);
-                        intent.putExtra("name", nameFromDB);
-                        intent.putExtra("username", usernameFromDB);
-                        intent.putExtra("email", emailFromDB);
-                        intent.putExtra("phoneNo", phoneNoFromDB);
-                        intent.putExtra("password", passwordFromDB);
+                        Intent intent = new Intent(getApplicationContext(), UserDashboard.class);
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.putString("nameKey", nameFromDB);
+                        editor.putString("usernameKey", usernameFromDB);
+                        editor.putString("emailKey", emailFromDB);
+                        editor.putString("phoneNoKey", phoneNoFromDB);
+                        editor.putString("passwordKey", passwordFromDB);
+                        editor.commit();
+//                        intent.putExtra("name", nameFromDB);
+//                        intent.putExtra("username", usernameFromDB);
+//                        intent.putExtra("email", emailFromDB);
+//                        intent.putExtra("phoneNo", phoneNoFromDB);
+//                        intent.putExtra("password", passwordFromDB);
                         startActivity(intent);
                         finish();
-                    }else{
+                    } else {
                         progressBar.setVisibility(View.GONE);
                         password.setError("Wrong Password");
                         password.requestFocus();
                     }
-                }else{
+                } else {
                     progressBar.setVisibility(View.GONE);
                     username.setError("No such User exist");
                     username.requestFocus();

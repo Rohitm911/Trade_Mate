@@ -7,7 +7,9 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
@@ -27,6 +29,7 @@ public class UserDashboard extends AppCompatActivity implements NavigationView.O
     RecyclerView.Adapter adapter;
     private GradientDrawable gradient1, gradient2, gradient3, gradient4;
     static final float END_SCALE = 0.7f;
+    SharedPreferences sharedPreferences;
 
     DrawerLayout drawerLayout;
     NavigationView navigationView;
@@ -50,10 +53,11 @@ public class UserDashboard extends AppCompatActivity implements NavigationView.O
         navigationView = findViewById(R.id.navigation_view);
         menuIcon = findViewById(R.id.menu_icon);
         contentView = findViewById(R.id.contentView);
+        sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
 
         //go to electronics items
-        electronics_img=findViewById(R.id.electronics);
-        electronics_img.setOnClickListener(new View.OnClickListener(){
+        electronics_img = findViewById(R.id.electronics);
+        electronics_img.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(UserDashboard.this, Electronics_category.class);
@@ -64,8 +68,8 @@ public class UserDashboard extends AppCompatActivity implements NavigationView.O
         });
 
         //go to books items
-        books_img=findViewById(R.id.books);
-        books_img.setOnClickListener(new View.OnClickListener(){
+        books_img = findViewById(R.id.books);
+        books_img.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(UserDashboard.this, Books_category.class);
@@ -76,8 +80,8 @@ public class UserDashboard extends AppCompatActivity implements NavigationView.O
         });
 
         // go to house hold
-        household_img=findViewById(R.id.household);
-        household_img.setOnClickListener(new View.OnClickListener(){
+        household_img = findViewById(R.id.household);
+        household_img.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(UserDashboard.this, Household_category.class);
@@ -88,8 +92,8 @@ public class UserDashboard extends AppCompatActivity implements NavigationView.O
         });
 
         //go to grocery
-        grocery_img=findViewById(R.id.grocery);
-        grocery_img.setOnClickListener(new View.OnClickListener(){
+        grocery_img = findViewById(R.id.grocery);
+        grocery_img.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(UserDashboard.this, Grocery_category.class);
@@ -100,7 +104,7 @@ public class UserDashboard extends AppCompatActivity implements NavigationView.O
         });
 
         //go to cart
-        cart_img=findViewById(R.id.go_to_cart);
+        cart_img = findViewById(R.id.go_to_cart);
         cart_img.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -108,7 +112,6 @@ public class UserDashboard extends AppCompatActivity implements NavigationView.O
                 startActivity(intent);
             }
         });
-
 
 
         naviagtionDrawer();
@@ -172,6 +175,23 @@ public class UserDashboard extends AppCompatActivity implements NavigationView.O
             case R.id.nav_search:
                 startActivity(new Intent(getApplicationContext(), Search.class));
                 break;
+            case R.id.nav_user_profile:
+                startActivity(new Intent(getApplicationContext(), UserProfile.class));
+                break;
+            case R.id.nav_home:
+                startActivity(new Intent(getApplicationContext(), UserDashboard.class));
+                finish();
+                break;
+            case R.id.nav_cart:
+                startActivity(new Intent(getApplicationContext(), cart.class));
+                break;
+            case R.id.nav_logout:
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.clear();
+                editor.commit();
+                startActivity(new Intent(getApplicationContext(), login.class));
+                finish();
+                break;
         }
 
         return true;
@@ -181,9 +201,9 @@ public class UserDashboard extends AppCompatActivity implements NavigationView.O
         featuredRecycler.setHasFixedSize(true);
         featuredRecycler.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         ArrayList<FeaturedHelperClass> bestOffers = new ArrayList<>();
-        bestOffers.add(new FeaturedHelperClass(R.drawable.dummy_grocery, "Dummy Text", "Rs. 100"));
-        bestOffers.add(new FeaturedHelperClass(R.drawable.dummy_grocery, "Dummy Text", "Rs. 100"));
-        bestOffers.add(new FeaturedHelperClass(R.drawable.dummy_grocery, "Dummy Text", "Rs. 100"));
+        bestOffers.add(new FeaturedHelperClass(R.drawable.earphone, "BoAt Earphone", "Rs. 299"));
+        bestOffers.add(new FeaturedHelperClass(R.drawable.half_girlfriend_book, "Half Girlfriend", "Rs. 120"));
+        bestOffers.add(new FeaturedHelperClass(R.drawable.real_juice, "Real Fruit Juice - Mango", "Rs. 85"));
 
         adapter = new FeaturedAdapter(bestOffers);
         featuredRecycler.setAdapter(adapter);
@@ -193,9 +213,9 @@ public class UserDashboard extends AppCompatActivity implements NavigationView.O
         mostViewedRecycler.setHasFixedSize(true);
         mostViewedRecycler.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         ArrayList<MostViewedHelperClass> mostViewedItems = new ArrayList<>();
-        mostViewedItems.add(new MostViewedHelperClass(R.drawable.dummy_grocery, "Dummy text", "Rs. 100"));
-        mostViewedItems.add(new MostViewedHelperClass(R.drawable.dummy_grocery, "Dummy text", "Rs. 100"));
-        mostViewedItems.add(new MostViewedHelperClass(R.drawable.dummy_grocery, "Dummy text", "Rs. 100"));
+        mostViewedItems.add(new MostViewedHelperClass(R.drawable.dettol_hand_sanitizer, "Dettol Hand Sanitizer", "Rs. 110"));
+        mostViewedItems.add(new MostViewedHelperClass(R.drawable.ashirwad_atta, "AASHIRVAAD - Wheat Flour", "Rs. 434"));
+        mostViewedItems.add(new MostViewedHelperClass(R.drawable.redmi_mobile, "Redmi Note 8 pro", "Rs. 15999"));
         adapter = new MostViewedAdpater(mostViewedItems);
         mostViewedRecycler.setAdapter(adapter);
     }
@@ -208,9 +228,9 @@ public class UserDashboard extends AppCompatActivity implements NavigationView.O
 
         ArrayList<CategoriesHelperClass> categoriesHelperClasses = new ArrayList<>();
         categoriesHelperClasses.add(new CategoriesHelperClass(R.drawable.laptop_icon, "Electronics", gradient1));
-        categoriesHelperClasses.add(new CategoriesHelperClass(R.drawable.laptop_icon, "Electronics", gradient2));
-        categoriesHelperClasses.add(new CategoriesHelperClass(R.drawable.laptop_icon, "Electronics", gradient3));
-        categoriesHelperClasses.add(new CategoriesHelperClass(R.drawable.laptop_icon, "Electronics", gradient4));
+        categoriesHelperClasses.add(new CategoriesHelperClass(R.drawable.book_icon, "Books", gradient2));
+        categoriesHelperClasses.add(new CategoriesHelperClass(R.drawable.home_icon, "Household", gradient3));
+        categoriesHelperClasses.add(new CategoriesHelperClass(R.drawable.cup_icon, "Grocery", gradient4));
 
         categoriesRecycler.setHasFixedSize(true);
         adapter = new CategoriesAdapter(categoriesHelperClasses);
@@ -219,9 +239,8 @@ public class UserDashboard extends AppCompatActivity implements NavigationView.O
 
     }
 
-    public void goToUserProfile(View view) {
-        Intent intent = new Intent(getApplicationContext(), UserProfile.class);
-        startActivity(intent);
+    public void goToSearch(View view) {
+        startActivity(new Intent(getApplicationContext(), Search.class));
     }
 
 

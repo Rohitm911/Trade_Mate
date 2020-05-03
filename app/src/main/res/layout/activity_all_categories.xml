@@ -61,6 +61,7 @@
                     android:fontFamily="@font/baloo"
                     android:padding="25dp"/>
                 <Button
+                    android:id="@+id/categories_household"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Expand All"
@@ -98,6 +99,7 @@
                     android:fontFamily="@font/baloo"
                     android:padding="25dp"/>
                 <Button
+                    android:id="@+id/categories_Grocery"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Expand All"
@@ -135,6 +137,7 @@
                     android:fontFamily="@font/baloo"
                     android:padding="25dp"/>
                 <Button
+                    android:id="@+id/categories_Books"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Expand All"
@@ -172,6 +175,7 @@
                     android:fontFamily="@font/baloo"
                     android:padding="25dp"/>
                 <Button
+                    android:id="@+id/categories_Electronics"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Expand All"
@@ -209,6 +213,7 @@
                     android:fontFamily="@font/baloo"
                     android:padding="25dp"/>
                 <Button
+                    android:id="@+id/categories_veg"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Expand All"

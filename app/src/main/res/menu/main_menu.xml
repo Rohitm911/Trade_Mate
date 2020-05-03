@@ -24,9 +24,9 @@
         <menu>
             <group android:checkableBehavior="single">
                 <item
-                    android:icon="@drawable/username_small_icon"
-                    android:id="@+id/nav_login"
-                    android:title="Login" />
+                    android:icon="@drawable/cart_small_icon"
+                    android:id="@+id/nav_cart"
+                    android:title="Cart" />
 
                 <item
                     android:icon="@drawable/menu_logout_icon"
