@@ -16,11 +16,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Welcome To TradeMate Wallet"
-            android:background="#FB4C4C"
+            android:background="#fece2f"
             android:fontFamily="@font/bungee"
             android:textColor="#000"
             android:textSize="25dp"
             android:gravity="center"
+            android:paddingBottom="10dp"
             android:layout_marginBottom="20dp"
             />
 
@@ -49,7 +50,7 @@
             android:layout_width="180dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="88dp"
-            android:background="#FB4C4C"
+            android:background="#fece2f"
             android:text="PAY"
             android:layout_gravity="center_horizontal"
             android:gravity="center"
