@@ -24,6 +24,7 @@ public class AllCategories extends AppCompatActivity {
         books = findViewById(R.id.categories_Books);
         grocery = findViewById(R.id.categories_Grocery);
         electronics = findViewById(R.id.categories_Electronics);
+
         veg = findViewById(R.id.categories_veg);
 
         household.setOnClickListener(new View.OnClickListener() {
@@ -57,7 +58,7 @@ public class AllCategories extends AppCompatActivity {
         veg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                startActivity(new Intent(getApplicationContext(), FruitsVeg_category.class));
             }
         });
 

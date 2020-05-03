@@ -55,7 +55,7 @@ public class All_ItemsAdapter extends RecyclerView.Adapter<All_ItemsAdapter.AllI
         // holder.imageView.setImageResource(helperClass.getUrl());
         holder.title.setText(helperClass.getName());
         holder.short_desc.setText(helperClass.getShort_desc());
-        holder.price.setText(helperClass.getPrice());
+        holder.price.setText("Rs. "+helperClass.getPrice());
     }
 
     @Override

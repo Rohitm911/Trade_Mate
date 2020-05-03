@@ -23,7 +23,7 @@ import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
 
-public class UserDashboard extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class UserDashboard extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,FeaturedAdapter.OnNoteListener1,MostViewedAdpater.OnNoteListener2,CategoriesAdapter.OnNoteListener3 {
 
     RecyclerView featuredRecycler, mostViewedRecycler, categoriesRecycler;
     RecyclerView.Adapter adapter;
@@ -40,6 +40,11 @@ public class UserDashboard extends AppCompatActivity implements NavigationView.O
     ImageView household_img;
     ImageView grocery_img;
     ImageView cart_img;
+
+    final ArrayList<FeaturedHelperClass> bestOffers = new ArrayList<>();
+    final ArrayList<MostViewedHelperClass> mostViewedItems = new ArrayList<>();
+    final ArrayList<CategoriesHelperClass> categoriesHelperClasses = new ArrayList<>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -200,23 +205,23 @@ public class UserDashboard extends AppCompatActivity implements NavigationView.O
     private void featuredRecycler() {
         featuredRecycler.setHasFixedSize(true);
         featuredRecycler.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-        ArrayList<FeaturedHelperClass> bestOffers = new ArrayList<>();
-        bestOffers.add(new FeaturedHelperClass(R.drawable.earphone, "BoAt Earphone", "Rs. 299"));
-        bestOffers.add(new FeaturedHelperClass(R.drawable.half_girlfriend_book, "Half Girlfriend", "Rs. 120"));
-        bestOffers.add(new FeaturedHelperClass(R.drawable.real_juice, "Real Fruit Juice - Mango", "Rs. 85"));
 
-        adapter = new FeaturedAdapter(bestOffers);
+        bestOffers.add(new FeaturedHelperClass(R.drawable.earphone, "BoAt Earphone", "299"));
+        bestOffers.add(new FeaturedHelperClass(R.drawable.half_girlfriend_book, "Half Girlfriend", "120"));
+        bestOffers.add(new FeaturedHelperClass(R.drawable.real_juice, "Real Fruit Juice - Mango", "85"));
+
+        adapter = new FeaturedAdapter(bestOffers,UserDashboard.this);
         featuredRecycler.setAdapter(adapter);
     }
 
     private void mostViewedRecycler() {
         mostViewedRecycler.setHasFixedSize(true);
         mostViewedRecycler.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-        ArrayList<MostViewedHelperClass> mostViewedItems = new ArrayList<>();
-        mostViewedItems.add(new MostViewedHelperClass(R.drawable.dettol_hand_sanitizer, "Dettol Hand Sanitizer", "Rs. 110"));
-        mostViewedItems.add(new MostViewedHelperClass(R.drawable.ashirwad_atta, "AASHIRVAAD - Wheat Flour", "Rs. 434"));
-        mostViewedItems.add(new MostViewedHelperClass(R.drawable.redmi_mobile, "Redmi Note 8 pro", "Rs. 15999"));
-        adapter = new MostViewedAdpater(mostViewedItems);
+
+        mostViewedItems.add(new MostViewedHelperClass(R.drawable.dettol_hand_sanitizer, "Dettol Hand Sanitizer", "110"));
+        mostViewedItems.add(new MostViewedHelperClass(R.drawable.ashirwad_atta, "AASHIRVAAD - Wheat Flour", "434"));
+        mostViewedItems.add(new MostViewedHelperClass(R.drawable.redmi_mobile, "Redmi Note 8 pro", "15999"));
+        adapter = new MostViewedAdpater(mostViewedItems,UserDashboard.this);
         mostViewedRecycler.setAdapter(adapter);
     }
 
@@ -226,14 +231,14 @@ public class UserDashboard extends AppCompatActivity implements NavigationView.O
         gradient3 = new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT, new int[]{0xfff7c59f, 0xFFf7c59f});
         gradient4 = new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT, new int[]{0xffb8d7f5, 0xffb8d7f5});
 
-        ArrayList<CategoriesHelperClass> categoriesHelperClasses = new ArrayList<>();
+
         categoriesHelperClasses.add(new CategoriesHelperClass(R.drawable.laptop_icon, "Electronics", gradient1));
         categoriesHelperClasses.add(new CategoriesHelperClass(R.drawable.book_icon, "Books", gradient2));
         categoriesHelperClasses.add(new CategoriesHelperClass(R.drawable.home_icon, "Household", gradient3));
         categoriesHelperClasses.add(new CategoriesHelperClass(R.drawable.cup_icon, "Grocery", gradient4));
 
         categoriesRecycler.setHasFixedSize(true);
-        adapter = new CategoriesAdapter(categoriesHelperClasses);
+        adapter = new CategoriesAdapter(categoriesHelperClasses,UserDashboard.this);
         categoriesRecycler.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         categoriesRecycler.setAdapter(adapter);
 
@@ -242,6 +247,66 @@ public class UserDashboard extends AppCompatActivity implements NavigationView.O
     public void goToSearch(View view) {
         startActivity(new Intent(getApplicationContext(), Search.class));
     }
+
+    @Override
+    public void onNoteClick1(int position) {
+        FeaturedHelperClass h = bestOffers.get(position);
+        Intent intent = new Intent(getApplicationContext(), SingleItemDisplay.class);
+        intent.putExtra("title",h.getTitle());
+        if(h.getTitle() == "Half Girlfriend")
+            intent.putExtra("image","https://firebasestorage.googleapis.com/v0/b/trade-mate-bmsce.appspot.com/o/half_girlfriend_book.jpeg?alt=media&token=b59693e3-4747-4713-99c3-461da19c9f89");
+        else if(h.getTitle() == "BoAt Earphone")
+            intent.putExtra("image","https://firebasestorage.googleapis.com/v0/b/trade-mate-bmsce.appspot.com/o/earphone.jpeg?alt=media&token=dc3fb5b6-5760-4def-931e-bb33a4a78f0d");
+        else
+            intent.putExtra("image","https://firebasestorage.googleapis.com/v0/b/trade-mate-bmsce.appspot.com/o/real_juice.jpeg?alt=media&token=70f1497b-cdab-4c54-bc69-35086f9e99cb");
+
+        intent.putExtra("full_desc",h.getTitle());
+        intent.putExtra("price",h.getDescription());
+        intent.putExtra("cat","electronics");
+        intent.putExtra("short_desc",h.getTitle());
+        startActivity(intent);
+        //go to new activity.
+
+    }
+    @Override
+    public void onNoteClick2(int position) {
+        MostViewedHelperClass h = mostViewedItems.get(position);
+        Intent intent = new Intent(getApplicationContext(), SingleItemDisplay.class);
+        intent.putExtra("title",h.getTitle());
+        if(h.getTitle() == "Dettol Hand Sanitizer")
+            intent.putExtra("image","https://firebasestorage.googleapis.com/v0/b/trade-mate-bmsce.appspot.com/o/dettol_hand_sanitizer.jpeg?alt=media&token=45b20e13-69fd-49cf-b024-4ca836499432");
+        else if(h.getTitle() == "AASHIRVAAD - Wheat Flour")
+            intent.putExtra("image","https://firebasestorage.googleapis.com/v0/b/trade-mate-bmsce.appspot.com/o/ashirwad_atta.jpeg?alt=media&token=0503c5e5-b59f-40bc-8e9b-2da0408c27f4");
+        else
+            intent.putExtra("image","https://firebasestorage.googleapis.com/v0/b/trade-mate-bmsce.appspot.com/o/redmi_mobile.jpeg?alt=media&token=ee54dd19-b0a5-4b20-922f-f5e77fd24766");
+
+        intent.putExtra("full_desc",h.getTitle());
+        intent.putExtra("price",h.getDescription());
+        intent.putExtra("cat","electronics");
+        intent.putExtra("short_desc",h.getTitle());
+        startActivity(intent);
+        //go to new activity.
+
+    }
+    @Override
+    public void onNoteClick3(int position) {
+        CategoriesHelperClass h = categoriesHelperClasses.get(position);
+        Intent intent = new Intent(getApplicationContext(), SingleItemDisplay.class);
+
+        if(h.getTitle() == "Electronics")
+            startActivity(new Intent(getApplicationContext(), Electronics_category.class));
+        else if(h.getTitle() == "Books")
+            startActivity(new Intent(getApplicationContext(), Books_category.class));
+        else if(h.getTitle() == "Household")
+            startActivity(new Intent(getApplicationContext(), Household_category.class));
+        else
+            startActivity(new Intent(getApplicationContext(), Grocery_category.class));
+
+
+    }
+
+
+
 
 
 }

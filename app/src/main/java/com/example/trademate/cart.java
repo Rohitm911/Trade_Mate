@@ -5,7 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -30,14 +32,16 @@ public class cart extends AppCompatActivity {
     Button clearcart;
     Button checkout;
     int total_price;
+    SharedPreferences sharedPreferences;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart);
+        sharedPreferences= getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+        final String uname=sharedPreferences.getString("usernameKey","xyz");
 
 
-
-        final DatabaseReference ref= FirebaseDatabase.getInstance().getReference("cart");
+        final DatabaseReference ref= FirebaseDatabase.getInstance().getReference("user").child(uname).child("cart");
         ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -73,7 +77,10 @@ public class cart extends AppCompatActivity {
         clearcart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ref.removeValue();
+
+
+                DatabaseReference ref1= FirebaseDatabase.getInstance().getReference("user");
+                ref1.child(uname).child("cart").removeValue();
 
             }
         });

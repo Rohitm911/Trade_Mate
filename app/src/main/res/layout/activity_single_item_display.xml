@@ -19,7 +19,7 @@
         android:layout_weight="1"
         android:text="ADD TO CART" />
         <Button
-        android:id="@+id/buy"
+        android:id="@+id/buy_now_btn"
         android:layout_width="1dp"
         android:layout_height="wrap_content"
         android:background="#000"

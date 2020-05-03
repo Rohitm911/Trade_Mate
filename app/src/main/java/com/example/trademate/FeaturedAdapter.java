@@ -16,25 +16,34 @@ import java.util.ArrayList;
 public class FeaturedAdapter extends RecyclerView.Adapter<FeaturedAdapter.FeaturedViewHolder> {
 
     ArrayList<FeaturedHelperClass> BestOffer;
+    OnNoteListener1 mOnNoteListener;
 
-    public FeaturedAdapter(ArrayList<FeaturedHelperClass> bestOffer) {
+    public FeaturedAdapter(ArrayList<FeaturedHelperClass> bestOffer,OnNoteListener1 mOnNoteListener) {
         BestOffer = bestOffer;
+        this.mOnNoteListener=mOnNoteListener;
+
     }
 
 
-    public static class FeaturedViewHolder extends RecyclerView.ViewHolder {
+    public static class FeaturedViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         ImageView image;
         TextView title, desc;
+        OnNoteListener1 onNoteListener;
 
-        public FeaturedViewHolder(@NonNull View itemView) {
+        public FeaturedViewHolder(@NonNull View itemView,OnNoteListener1 onNoteListener) {
             super(itemView);
-
+            this.onNoteListener=onNoteListener;
             //Hooks
             image = itemView.findViewById(R.id.featured_image);
             title = itemView.findViewById(R.id.featured_title);
             desc = itemView.findViewById(R.id.featured_desc);
+            itemView.setOnClickListener(this);
 
+        }
+        @Override
+        public void onClick(View v) {
+            onNoteListener.onNoteClick1(getAdapterPosition());
         }
     }
 
@@ -42,7 +51,7 @@ public class FeaturedAdapter extends RecyclerView.Adapter<FeaturedAdapter.Featur
     @Override
     public FeaturedViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.featured_card_design, parent, false);
-        FeaturedViewHolder featuredViewHolder = new FeaturedViewHolder(view);
+        FeaturedViewHolder featuredViewHolder = new FeaturedViewHolder(view,mOnNoteListener);
         return featuredViewHolder;
     }
 
@@ -53,11 +62,15 @@ public class FeaturedAdapter extends RecyclerView.Adapter<FeaturedAdapter.Featur
        holder.image.setImageResource(featuredHelperClass.getImage());
 
         holder.title.setText(featuredHelperClass.getTitle());
-        holder.desc.setText(featuredHelperClass.getDescription());
+        holder.desc.setText("Rs. "+featuredHelperClass.getDescription());
     }
 
     @Override
     public int getItemCount() {
         return BestOffer.size();
+    }
+
+    public interface OnNoteListener1{
+        void onNoteClick1(int position);
     }
 }
