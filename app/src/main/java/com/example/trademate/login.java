@@ -103,6 +103,7 @@ public class login extends AppCompatActivity {
                         String emailFromDB = dataSnapshot.child(userEnteredUsername).child("email").getValue(String.class);
                         Intent intent = new Intent(getApplicationContext(), UserDashboard.class);
                         SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.clear();
                         editor.putString("nameKey", nameFromDB);
                         editor.putString("usernameKey", usernameFromDB);
                         editor.putString("emailKey", emailFromDB);
