@@ -91,6 +91,7 @@ public class cart extends AppCompatActivity {
 
                 Intent intent = new Intent(cart.this, Payment.class);
                 intent.putExtra("amt",""+total_price);
+                intent.putExtra("uname",""+uname);
 
                 startActivity(intent);
             }

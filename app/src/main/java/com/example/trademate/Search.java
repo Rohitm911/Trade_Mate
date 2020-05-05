@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -22,7 +23,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class Search extends AppCompatActivity {
+public class Search extends AppCompatActivity implements SearchAdapter.OnNoteListener4 {
 
     TextInputLayout seachText;
     RecyclerView recyclerView;
@@ -31,6 +32,7 @@ public class Search extends AppCompatActivity {
 
     ArrayList<String> itemNameList;
     ArrayList<String> itemImageList;
+    ArrayList<All_ItemsHelper> searcheditems;
     SearchAdapter searchAdapter;
 
     @Override
@@ -49,6 +51,7 @@ public class Search extends AppCompatActivity {
 
         itemImageList = new ArrayList<>();
         itemNameList = new ArrayList<>();
+        searcheditems=new ArrayList<>();
 
         seachText.getEditText().addTextChangedListener(new TextWatcher() {
             @Override
@@ -68,6 +71,7 @@ public class Search extends AppCompatActivity {
                 }else{
                     itemImageList.clear();
                     itemNameList.clear();
+                    searcheditems.clear();
                     recyclerView.removeAllViews();
                 }
             }
@@ -82,6 +86,7 @@ public class Search extends AppCompatActivity {
 
                 itemImageList.clear();
                 itemNameList.clear();
+                searcheditems.clear();
                 recyclerView.removeAllViews();
 
                 int counter = 0;
@@ -89,17 +94,18 @@ public class Search extends AppCompatActivity {
                     String uid = snapshot.getKey();
                     String itemName = snapshot.child("name").getValue(String.class);
                     String itemImage = snapshot.child("image").getValue(String.class);
-
+                    All_ItemsHelper h = snapshot.getValue(All_ItemsHelper.class);
                     if (itemName.toLowerCase().contains(searchedString.toLowerCase())){
                         itemNameList.add(itemName);
                         itemImageList.add(itemImage);
+                        searcheditems.add(h);
                         counter++;
                     }
 
                     if (counter == 15) break;
                 }
 
-                searchAdapter = new SearchAdapter(Search.this, itemNameList,itemImageList);
+                searchAdapter = new SearchAdapter(Search.this, itemNameList,itemImageList,searcheditems,Search.this);
                 recyclerView.setAdapter(searchAdapter);
             }
 
@@ -108,5 +114,19 @@ public class Search extends AppCompatActivity {
 
             }
         });
+    }
+
+    @Override
+    public void onNoteClick4 (int position) {
+        All_ItemsHelper all_itemsHelper = searcheditems.get(position);
+        Intent intent = new Intent(getApplicationContext(), SingleItemDisplay.class);
+        intent.putExtra("title",all_itemsHelper.getName());
+        intent.putExtra("image",all_itemsHelper.getImage());
+        intent.putExtra("full_desc",all_itemsHelper.getFull_desc());
+        intent.putExtra("price",all_itemsHelper.getPrice());
+        intent.putExtra("cat",all_itemsHelper.getCategory());
+        intent.putExtra("short_desc",all_itemsHelper.getShort_desc());
+        startActivity(intent);
+
     }
 }

@@ -16,6 +16,7 @@ import java.util.ArrayList;
 public class FeaturedAdapter extends RecyclerView.Adapter<FeaturedAdapter.FeaturedViewHolder> {
 
     ArrayList<FeaturedHelperClass> BestOffer;
+
     OnNoteListener1 mOnNoteListener;
 
     public FeaturedAdapter(ArrayList<FeaturedHelperClass> bestOffer,OnNoteListener1 mOnNoteListener) {

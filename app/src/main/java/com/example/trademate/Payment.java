@@ -2,6 +2,7 @@ package com.example.trademate;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -23,6 +24,8 @@ public class Payment extends AppCompatActivity {
         tv=findViewById(R.id.amt_paid);
         tv.setText("Amount to be paid: Rs. "+amt);
 
+
+
         Button loadbtn = findViewById(R.id.payment_btn);
         final loadingDialog l = new loadingDialog(Payment.this);
         loadbtn.setOnClickListener(new View.OnClickListener() {
@@ -33,6 +36,7 @@ public class Payment extends AppCompatActivity {
                                         public void run() {
                                             l.endload();
                                             Intent i = new Intent(getApplicationContext(), thank.class);
+
                                             startActivity(i);
                                         }
                                     }, 5000
